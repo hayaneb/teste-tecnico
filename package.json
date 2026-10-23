@@ -1,0 +1,21 @@
+{
+  "name": "teste-tecnico",
+  "version": "1.0.0",
+  "description": "Bem-vindo(a)! Este desafio faz parte do processo seletivo da Parcelex.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "tsc && node dist/container.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^5.3.0"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.6",
+    "@types/node": "^26.6.5",
+    "typescript": "^5.9.3"
+  }
+}
