@@ -31,6 +31,14 @@ app.post("/eventos", (req, res) => {
   res.status(202).json(evento);
 });
 
+app.get("/eventos", (req, res) => {
+  res.status(200).json(eventoService.listar());
+});
+
+app.get("/eventos/:id", (req, res) => {
+  res.status(200).json(eventoService.buscarPorId(req.params.id));
+});
+
 app.use((error: unknown, req: Request, res: Response, next: NextFunction) => {
   if (error instanceof AppError) {
     res.status(error.code).json({ mensagem: error.message });

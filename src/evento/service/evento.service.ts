@@ -40,6 +40,22 @@ export class EventoService {
     return novoEvento;
   }
 
+  listar() {
+    return this.eventos.map((evento) => this.buscarPorId(evento.id));
+  }
+
+  buscarPorId(id: string) {
+    const evento = this.eventos.find((evento) => evento.id === id);
+
+    if (!evento) {
+      throw new AppError("Evento não encontrado", 404);
+    }
+    return {
+      ...evento,
+      entregas: this.entregas.filter((entrega) => entrega.eventoId === id),
+    };
+  }
+
   private async enviar(evento: IEvento, assinatura: IAssinatura): Promise<void> {
     const entrega: IEntrega = { eventoId: evento.id, url: assinatura.url, status: "falha" };
     this.entregas.push(entrega);
