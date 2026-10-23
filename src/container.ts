@@ -1,11 +1,13 @@
 import express, { NextFunction, Request, Response } from "express";
 import { AppError } from "./utils";
 import { AssinaturaService } from "./assinatura/service/assinatura.service";
+import { EventoService } from "./evento/service/evento.service";
 
 const app = express();
 app.use(express.json());
 
 const assinaturaService = new AssinaturaService();
+const eventoService = new EventoService(assinaturaService);
 
 app.post("/assinaturas", (req, res) => {
   const assinatura = assinaturaService.cadastrar(req.body.evento, req.body.url);
@@ -22,6 +24,11 @@ app.get("/assinaturas/:id", (req, res) => {
 
 app.patch("/assinaturas/:id", (req, res) => {
   res.status(200).json(assinaturaService.alterarStatus(req.params.id, req.body.ativa));
+});
+
+app.post("/eventos", (req, res) => {
+  const evento = eventoService.publicar(req.body.evento, req.body.dados);
+  res.status(202).json(evento);
 });
 
 app.use((error: unknown, req: Request, res: Response, next: NextFunction) => {

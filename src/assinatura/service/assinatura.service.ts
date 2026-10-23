@@ -2,7 +2,7 @@ import { randomUUID } from "node:crypto";
 import { AppError } from "../../utils";
 import { IAssinatura } from "../interface/assinatura.interface";
 
-const EVENTOS_SUPORTADOS = ["pedido.criado", "pagamento.aprovado", "pagamento.parcela.estornada"];
+export const EVENTOS_SUPORTADOS = ["pedido.criado", "pagamento.aprovado", "pagamento.parcela.estornada"];
 
 export class AssinaturaService {
   private assinaturas: IAssinatura[];
